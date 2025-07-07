@@ -1,9 +1,5 @@
 {
-  "admin-example.navigation.label-group": "Example admins",
-  "admin-example.navigation.label-table": "Example table",
-  "admin-example.navigation.search.kws": "test, mock, fake",
-  "admin-example.navigation.details.search.kws": "details, mock, test, hello",
-  "admin-example.navigation.table.search.kws": "table, mock, test, bye",
-  "admin-example.hello-world": "Example Admin",
-  "admin-example.details": "Details page"
+  "televendas.navigation.label": "Televendas V2 - Otávio",
+  "listar-televendas.navigation.label": "Listar atendimentos",
+  "iniciar-televenda.navigation.label": "Novo Atendimento"
 }

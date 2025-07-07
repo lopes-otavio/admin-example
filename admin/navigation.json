@@ -1,13 +1,17 @@
-{
-  "section": "orders",
-  "titleId": "admin-example.navigation.label-group",
-  "subSection": "example",
-  "searchKeyWordsHelpers": "admin-example.navigation.search.kws",
-  "subSectionItems": [
-    {
-      "labelId": "admin-example.navigation.label-table",
-      "path": "/admin/example",
-      "searchKeyWordsHelpers": "admin-example.navigation.table.search.kws"
-    }
-  ]
-}
+[
+  {
+      "section": "orders",
+      "titleId": "televendas.navigation.label",
+      "subSectionItems": [
+          {
+              "labelId": "iniciar-televenda.navigation.label",
+              "path": "/admin/iniciar-televenda"
+          },
+          {
+            "labelId": "listar-televendas.navigation.label",
+            "path": "/admin/listar-televendas"
+          }
+      ]
+  }
+]
+

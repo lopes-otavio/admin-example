@@ -1,10 +1,10 @@
 {
-  "admin.app.example": {
-    "component": "AdminExample",
-    "path": "/admin/app/example"
+  "admin.app.crm-integration-start": {
+      "component": "StartTelevenda",
+      "path": "/admin/app/iniciar-televenda"
   },
-  "admin.app.example-detail": {
-    "component": "AdminExampleDetail",
-    "path": "/admin/app/example/:id"
-  }
+  "admin.app.crm-integration": {
+    "component": "integrationMain",
+    "path": "/admin/app/listar-televendas"
+}
 }

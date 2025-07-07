@@ -1,15 +1,15 @@
 {
-  "name": "admin-example",
+  "name": "televendas",
   "vendor": "vtex",
   "version": "0.0.12",
-  "title": "Example Admin App",
-  "description": "",
-  "mustUpdateAt": "2022-08-28",
+  "title": "Televendas",
+  "description": "App Televendas FN",
   "scripts": {
     "postreleasy": "vtex publish"
   },
   "dependencies": {
-    "vtex.styleguide": "9.x"
+    "vtex.styleguide": "9.x",
+    "spro.service-spro": "2.x"
   },
   "builders": {
     "react": "3.x",
