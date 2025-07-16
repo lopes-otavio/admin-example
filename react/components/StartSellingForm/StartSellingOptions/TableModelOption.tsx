@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import type { ClientData } from "../../typings/types";
+import type { ClientData } from "../../../typings/types";
 import { Button } from "vtex.styleguide";
 import * as XLSX from "xlsx";
-import { createOrderFormWithItems, getItemsBySku, setImpersonateCustomer } from "../../services/clientServices";
+import { createOrderFormWithItems, getItemsBySku, setImpersonateCustomer } from "../../../services/clientServices";
 
 type Props = {
   clientData: ClientData;

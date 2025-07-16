@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { ClientAddressData, ClientData } from '../../typings/types'
+import { ClientAddressData, ClientData } from '../../../typings/types'
 import { Input, EXPERIMENTAL_Select } from "vtex.styleguide"
-import { maskCNPJ } from '../../masks'
-import { getJuridicPersonDataByCnpj } from '../../services/clientServices'
+import { maskCNPJ } from '../../../masks'
+import { getJuridicPersonDataByCnpj } from '../../../services/clientServices'
 
 type Props = {
   formData: ClientData

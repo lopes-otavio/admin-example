@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import type { ClientAddressData, ClientData } from "../../typings/types"
 import { Button, Checkbox } from "vtex.styleguide"
-import CorporateInputs from "./CorporateInputs"
-import ClientInputs from "./ClientInputs"
-import AddressInputs from "./AddressInputs"
+import CorporateInputs from "./StartSellingInputs/CorporateInputs"
+import ClientInputs from "./StartSellingInputs/ClientInputs"
+import AddressInputs from "./StartSellingInputs/AddressInputs"
 import { maskCNPJ, maskCPF } from "../../masks"
 
 type Props = {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ClientAddressData, ClientData } from '../typings/types'
+import { ClientAddressData, ClientData, Televenda } from '../typings/types'
 
 
 
@@ -91,6 +91,33 @@ export async function createOrderFormWithItems(clientData: ClientData, items: an
 
   return {
     orderFormId: data.orderFormId,
+    status
+  }
+}
+
+export async function getOrderFormById(orderFormId: string ) {
+  const {data, status} = await axios.post(`/_v/getOrderform`, {orderFormId})
+
+  return {
+    orderFormId: data.orderFormId,
+    orderForm: data.orderForm,
+    status
+  }
+}
+
+export async function getTelevendaBySeller(email: string, orderFormId: string ) {
+  const {data, status} = await axios.post(`/_v/search/televenda`, {email, cartid: orderFormId})
+
+  return {
+    televendas: data.sellerEstimate,
+    status
+  }
+}
+export async function createTelevenda(televenda: Televenda ) {
+  const {data, status} = await axios.post(`/_v/televenda`, televenda)
+
+  return {
+    data,
     status
   }
 }

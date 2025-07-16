@@ -67,3 +67,14 @@ export interface ValidDataFeedBack {
   missingFields: string[],
   missingAddressFields: string[]
 }
+
+export interface Televenda {
+  emailConsumer: string,
+  firstName: string,
+  lastName: string,
+  emailSeller: string,
+  name: string,
+  products: string,
+  id: string,
+  date: string
+}

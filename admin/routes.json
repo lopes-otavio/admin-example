@@ -3,8 +3,12 @@
       "component": "StartTelevenda",
       "path": "/admin/app/iniciar-televenda"
   },
-  "admin.app.crm-integration": {
+  "admin.app.crm-listing": {
     "component": "integrationMain",
     "path": "/admin/app/listar-televendas"
-}
+  },
+  "admin.app.crm-create": {
+    "component": "CreateNewTelevenda",
+    "path": "/admin/app/create-televenda"
+  }
 }

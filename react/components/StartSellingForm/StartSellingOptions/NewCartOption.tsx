@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { ClientData } from '../../typings/types'
+import { ClientData } from '../../../typings/types'
 import { Button } from "vtex.styleguide"
-import { createOrderForm, setImpersonateCustomer } from '../../services/clientServices'
+import { createOrderForm, setImpersonateCustomer } from '../../../services/clientServices'
 
 type Props = {
   clientData: ClientData

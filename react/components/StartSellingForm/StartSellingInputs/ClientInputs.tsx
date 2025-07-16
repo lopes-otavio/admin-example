@@ -1,7 +1,7 @@
 import React, { Component } from "react"
-import type { ClientData } from "../../typings/types"
+import type { ClientData } from "../../../typings/types"
 import { Input } from "vtex.styleguide"
-import { maskCPF } from "../../masks"
+import { maskCPF } from "../../../masks"
 
 type Props = {
   isNewClient?: boolean,

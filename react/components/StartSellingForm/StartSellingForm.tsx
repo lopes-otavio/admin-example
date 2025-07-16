@@ -6,7 +6,7 @@ import ClientDataForm from "./ClientDataForm"
 import { isDataValidToCheckout } from "../../services/clientServices"
 import { validateClientData } from "./clientDataValidator"
 import ValidDataFeedback from "./ValidDataFeedback"
-import StartSellingOptions from "../StartSellingOptions/StartSellingOptions"
+import StartSellingOptions from "./StartSellingOptions/StartSellingOptions"
 
 type Props = {
   clientData: ClientData

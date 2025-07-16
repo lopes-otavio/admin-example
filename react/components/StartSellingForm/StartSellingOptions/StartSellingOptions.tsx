@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ClientData } from '../../typings/types'
+import { ClientData } from '../../../typings/types'
 import NewCartOption from './NewCartOption'
 import ExistentCartOption from './ExistentCartOption'
 import TableModelOption from './TableModelOption'

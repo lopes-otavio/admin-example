@@ -1,7 +1,7 @@
 import React, { Component } from "react"
-import type { ClientAddressData, ClientData } from "../../typings/types"
+import type { ClientAddressData, ClientData } from "../../../typings/types"
 import { Input } from "vtex.styleguide"
-import { getAddressDataByCep } from "../../services/clientServices"
+import { getAddressDataByCep } from "../../../services/clientServices"
 
 type Props = {
   formData: ClientData
