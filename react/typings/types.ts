@@ -78,3 +78,17 @@ export interface Televenda {
   id: string,
   date: string
 }
+
+export interface TelevendaItem {
+  cartid: string
+  datedoc: string
+  emailconsumer: string
+  emailseller: string
+  id: string
+  nameconsumer: string
+  notedoc: string
+  orderid: string
+  products: string
+  status: string
+  titledoc: string
+}

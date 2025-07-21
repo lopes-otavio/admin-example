@@ -113,6 +113,18 @@ export async function getTelevendaBySeller(email: string, orderFormId: string ) 
     status
   }
 }
+
+export async function getAllTelevendasBySeller(email: string, emailconsumer?: string, conditionDate?: string ) {
+  const {data, status} = await axios.post(`/_v/search/televenda`, {email, emailconsumer, conditionDate})
+
+  return {
+    televendas: data.sellerEstimate,
+    status
+  }
+}
+
+
+
 export async function createTelevenda(televenda: Televenda ) {
   const {data, status} = await axios.post(`/_v/televenda`, televenda)
 
