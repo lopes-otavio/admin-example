@@ -3,6 +3,9 @@ import type { TelevendaItem } from "../../typings/types"
 import ListItem from "./ListItem"
 import Pagination from "./Pagination"
 
+type SortOption = "dateTimeDoc" | "nameconsumer"
+type SortOrder = "asc" | "desc"
+
 type Props = {
   listItems: TelevendaItem[]
   currentPage: number
@@ -11,6 +14,9 @@ type Props = {
   itemsPerPage: number
   totalItems: number
   isSearching?: boolean
+  sortBy: SortOption
+  sortOrder: SortOrder
+  onSortChange: (sortBy: SortOption) => void
 }
 
 export default function ListTable({
@@ -21,7 +27,19 @@ export default function ListTable({
   itemsPerPage,
   totalItems,
   isSearching = false,
+  sortBy,
+  sortOrder,
+  onSortChange,
 }: Props) {
+  const getSortIcon = (column: SortOption) => {
+    if (sortBy !== column) return "↕️"
+    return sortOrder === "asc" ? "↑" : "↓"
+  }
+
+  const handleHeaderClick = (column: SortOption) => {
+    onSortChange(column)
+  }
+
   return (
     <div className="w-100">
       <div className="bg-base br3 ba b--muted-4 overflow-hidden">
@@ -30,13 +48,26 @@ export default function ListTable({
           className="bg-muted-5 bb b--muted-4"
           style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr 1fr 1fr" }}
         >
-          <div className="pa3 fw6 f6 c-muted-1">Nome</div>
+          <div
+            className="pa3 fw6 f6 c-muted-1 pointer hover-bg-muted-4 flex items-center justify-between"
+            onClick={() => handleHeaderClick("nameconsumer")}
+            title="Clique para ordenar por nome"
+          >
+            <span>Nome</span>
+            <span className="ml2">{getSortIcon("nameconsumer")}</span>
+          </div>
           <div className="pa3 fw6 f6 c-muted-1">E-mail</div>
-          <div className="pa3 fw6 f6 c-muted-1">Data</div>
+          <div
+            className="pa3 fw6 f6 c-muted-1 pointer hover-bg-muted-4 flex items-center justify-between"
+            onClick={() => handleHeaderClick("dateTimeDoc")}
+            title="Clique para ordenar por data"
+          >
+            <span>Data</span>
+            <span className="ml2">{getSortIcon("dateTimeDoc")}</span>
+          </div>
           <div className="pa3 fw6 f6 c-muted-1">Status</div>
           <div className="pa3 fw6 f6 c-muted-1">Ações</div>
         </div>
-
         {/* Body */}
         <div>
           {listItems.length > 0 ? (
@@ -50,7 +81,6 @@ export default function ListTable({
           )}
         </div>
       </div>
-
       {/* Pagination */}
       {totalItems > 0 && (
         <Pagination

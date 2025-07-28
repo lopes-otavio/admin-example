@@ -1,5 +1,8 @@
 import React from "react"
-import { Input } from "vtex.styleguide"
+import { Input, Dropdown } from "vtex.styleguide"
+
+type SortOption = "dateTimeDoc" | "nameconsumer"
+type SortOrder = "asc" | "desc"
 
 type SearchFilterProps = {
   searchTerm: string
@@ -9,6 +12,9 @@ type SearchFilterProps = {
   isSearching?: boolean
   totalItems?: number
   totalUnfilteredItems?: number
+  sortBy: SortOption
+  sortOrder: SortOrder
+  onSortChange: (sortBy: SortOption) => void
 }
 
 export default function SearchFilter({
@@ -19,11 +25,32 @@ export default function SearchFilter({
   isSearching = false,
   totalItems = 0,
   totalUnfilteredItems = 0,
+  sortBy,
+  sortOrder,
+  onSortChange,
 }: SearchFilterProps) {
+  const sortOptions = [
+    {
+      value: "dateTimeDoc",
+      label: "Data do Atendimento",
+    },
+    {
+      value: "nameconsumer",
+      label: "Nome do Cliente",
+    },
+  ]
+
+  const getSortLabel = () => {
+    const option = sortOptions.find((opt) => opt.value === sortBy)
+    const orderLabel = sortOrder === "asc" ? "↑" : "↓"
+
+    return `${option?.label} ${orderLabel}`
+  }
+
   return (
     <div className="mb4">
       <div className="flex items-center">
-        <div className="flex-auto">
+        <div className="flex-auto mr3">
           <Input
             placeholder={placeholder}
             value={searchTerm}
@@ -40,8 +67,15 @@ export default function SearchFilter({
             }
           />
         </div>
+        <div className="flex-none">
+          <Dropdown
+            size="large"
+            options={sortOptions}
+            value={sortBy}
+            onChange={(_: any, value: SortOption) => onSortChange(value)}
+          />
+        </div>
       </div>
-
       {isSearching && (
         <div className="mt2 f6 c-muted-2">
           {totalItems === 0 ? (
@@ -54,6 +88,7 @@ export default function SearchFilter({
           )}
         </div>
       )}
+      <div className="mt2 f6 c-muted-2">Ordenado por: {getSortLabel()}</div>
     </div>
   )
 }

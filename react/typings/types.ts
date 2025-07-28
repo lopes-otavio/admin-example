@@ -82,6 +82,7 @@ export interface Televenda {
 export interface TelevendaItem {
   cartid: string
   datedoc: string
+  dateTimeDoc: string
   emailconsumer: string
   emailseller: string
   id: string
@@ -91,4 +92,22 @@ export interface TelevendaItem {
   products: string
   status: string
   titledoc: string
+}
+
+export interface ShareOptions {
+  email?: string
+  whatsapp?: boolean
+  copyLink?: boolean
+}
+
+export interface PrintOptions {
+  format: "pdf" | "html"
+  includeProducts: boolean
+  includeNotes: boolean
+}
+
+export interface CopyModelOptions {
+  includeCustomer: boolean
+  includeProducts: boolean
+  includeNotes: boolean
 }

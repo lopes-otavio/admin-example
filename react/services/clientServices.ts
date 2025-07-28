@@ -24,8 +24,6 @@ export async function getClientData(documentType: string, value: string) {
 export async function isDataValidToCheckout({email}: ClientData) {
   const {data, status} = await axios.get(`/api/checkout/pub/profiles?email=${email}&ensureComplete=false`)
 
-  console.log('data', data)
-
   return {
     data,
     status
@@ -95,7 +93,8 @@ export async function createOrderFormWithItems(clientData: ClientData, items: an
   }
 }
 
-export async function getOrderFormById(orderFormId: string ) {
+export async function getOrderFormById(orderFormId: string | null ) {
+
   const {data, status} = await axios.post(`/_v/getOrderform`, {orderFormId})
 
   return {
@@ -105,7 +104,8 @@ export async function getOrderFormById(orderFormId: string ) {
   }
 }
 
-export async function getTelevendaBySeller(email: string, orderFormId: string ) {
+
+export async function getTelevendaBySeller(email: string, orderFormId: string | null ) {
   const {data, status} = await axios.post(`/_v/search/televenda`, {email, cartid: orderFormId})
 
   return {

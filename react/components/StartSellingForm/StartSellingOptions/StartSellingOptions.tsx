@@ -17,8 +17,6 @@ export default class StartSellingOptions extends Component<Props, State> {
 
     const { clientData } = this.props
 
-    console.log('CLIENTE VALIDO:', clientData)
-
     return (
       <div className="flex items-top br2 b--light-gray ba bg-base w-100">
         <NewCartOption clientData={clientData} />

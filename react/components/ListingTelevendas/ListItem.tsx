@@ -1,6 +1,7 @@
 import React from 'react'
 import type { TelevendaItem } from "../../typings/types"
 import {Button, Tag } from "vtex.styleguide"
+import { isExpired } from '../../helpers/validations'
 
 type Props = {
   item: TelevendaItem
@@ -14,12 +15,16 @@ export default function ListItem({ item, isLast = false }: Props) {
   }
 
   const handleAccessClick = () => {
-    console.log("Accessing item:", item.id)
+    const cleanId = item.cartid.replace(/-/g, '');
+    window.open(`/admin/detalhes-televenda?id=${cleanId}`, 'siteWindow');
   }
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText(item.id)
   }
+
+  const expired = item?.datedoc ? isExpired(item.datedoc) : false
+  const isActive = item?.status === "novo" && !expired
 
   return (
     <div
@@ -46,10 +51,11 @@ export default function ListItem({ item, isLast = false }: Props) {
 
       {/* Status */}
       <div className="pa3 flex items-center">
-        <Tag
-          type={`${item.status == "novo" ? "warning" : "success"}`}
-          children={`${item.status == "novo" ? "Ativo" : "Finalizado"}`}
-        />
+        {isActive ? (
+          <Tag type="success">Ativo</Tag>
+        ) : (
+          <Tag type="warning">Vencido</Tag>
+        )}
       </div>
 
       {/* Ação */}

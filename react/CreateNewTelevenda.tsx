@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { statusInital } from "./constants/createStatusInitial"
 import { Spinner } from "vtex.styleguide"
 import { createTelevenda, getCurrentSeller, getOrderFormById, getTelevendaBySeller } from "./services/clientServices"
-import { formatDataToTelevenda, formatDate } from "./helpers/formaters"
+import { formatDataToTelevenda, formatDateHourMinute } from "./helpers/formaters"
 
 type Props = {}
 
@@ -105,7 +105,6 @@ export default function CreateNewTelevenda({}: Props) {
 
       const { clientProfileData } = orderForm
       const { profileCompleteOnLoading, profileErrorOnLoading } = clientProfileData
-      console.log("clientProfileData", clientProfileData)
 
       if (!profileCompleteOnLoading || profileErrorOnLoading) {
         setStatus({
@@ -121,7 +120,7 @@ export default function CreateNewTelevenda({}: Props) {
 
       const listProducts: Product[] = orderForm.items
       const products = listProducts.map((item: Product) => `id:${item.id}-price:${item.sellingPrice}`).join(",")
-      const dateCreate = formatDate(new Date())
+      const dateCreate = formatDateHourMinute(new Date())
       const televendaData = formatDataToTelevenda(sellerEmail, dateCreate, products, orderFormId, orderForm)
 
       setStatus((prev) => ({

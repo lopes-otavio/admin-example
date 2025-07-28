@@ -1,0 +1,63 @@
+export const pdfStyles = {
+  container: {
+    fontFamily: "Arial, sans-serif",
+    fontSize: "12px",
+    lineHeight: "1.4",
+    color: "#333",
+    padding: "20px",
+    maxWidth: "100%",
+    backgroundColor: "white",
+  },
+  header: {
+    textAlign: "center" as const,
+    marginBottom: "20px",
+    borderBottom: "1px solid #ccc",
+    paddingBottom: "15px",
+  },
+  section: {
+    marginBottom: "15px",
+    pageBreakInside: "avoid" as const,
+  },
+  sectionTitle: {
+    backgroundColor: "#f5f5f5",
+    border: "1px solid #333",
+    padding: "8px",
+    textAlign: "center" as const,
+    fontSize: "12px",
+    fontWeight: "bold" as const,
+    margin: "0 0 10px 0",
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse" as const,
+    fontSize: "11px",
+  },
+  tableHeader: {
+    backgroundColor: "#f0f0f0",
+    borderBottom: "1px solid #ccc",
+    padding: "8px 4px",
+    fontWeight: "bold" as const,
+  },
+  tableCell: {
+    padding: "6px 4px",
+    borderBottom: "1px solid #eee",
+    verticalAlign: "top" as const,
+  },
+  footer: {
+    marginTop: "30px",
+    paddingTop: "15px",
+    borderTop: "1px solid #ccc",
+    fontSize: "9px",
+    textAlign: "center" as const,
+    color: "#666",
+  },
+  discountBadge: {
+    fontSize: "8px",
+    color: "white",
+    backgroundColor: "#007bff",
+    padding: "2px 4px",
+    borderRadius: "3px",
+    display: "inline-block",
+    fontWeight: "bold" as const,
+  },
+}

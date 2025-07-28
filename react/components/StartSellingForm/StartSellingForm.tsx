@@ -77,7 +77,6 @@ export default class StartSellingForm extends Component<Props, State> {
   }
 
   private handleVerifyData = async (formData: ClientData): Promise<void> => {
-    console.log("Dados recebidos no componente pai:", formData)
     await this.verifyData(formData)
   }
 

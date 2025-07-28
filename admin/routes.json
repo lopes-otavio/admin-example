@@ -10,5 +10,9 @@
   "admin.app.crm-create": {
     "component": "CreateNewTelevenda",
     "path": "/admin/app/create-televenda"
+  },
+  "admin.app.crm-details": {
+    "component": "DetailsTelevenda",
+    "path": "/admin/app/detalhes-televenda"
   }
 }

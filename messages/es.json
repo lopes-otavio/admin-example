@@ -1,5 +1,6 @@
 {
   "televendas.navigation.label": "Televendas V2 - Otávio",
   "listar-televendas.navigation.label": "Listar atendimentos",
-  "iniciar-televenda.navigation.label": "Novo Atendimento"
+  "iniciar-televenda.navigation.label": "Novo Atendimento",
+  "detalhes-televenda.navigation.label": "Detalhes Atendimento"
 }
