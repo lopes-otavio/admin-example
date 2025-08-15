@@ -23,7 +23,7 @@ export default function ProductSummary({ orderFormData }: ProductsListProps) {
     <div className="bg-muted-5 pt5">
       <div className="br2 b--light-gray ba bg-base w-100 pa6">
         <div className="flex items-center justify-between">
-          <h3 className="normal f5 mt0">Items</h3>
+          <h3 className="normal f5 mt0">Item</h3>
         </div>
 
         {/* Header da tabela */}

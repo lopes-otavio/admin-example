@@ -3,7 +3,7 @@ import type { TelevendaItem } from "../../typings/types"
 import ListItem from "./ListItem"
 import Pagination from "./Pagination"
 
-type SortOption = "dateTimeDoc" | "nameconsumer"
+type SortOption = "dateTimeDoc" | "nameconsumer" | "emailconsumer"
 type SortOrder = "asc" | "desc"
 
 type Props = {
@@ -56,7 +56,14 @@ export default function ListTable({
             <span>Nome</span>
             <span className="ml2">{getSortIcon("nameconsumer")}</span>
           </div>
-          <div className="pa3 fw6 f6 c-muted-1">E-mail</div>
+          <div
+            className="pa3 fw6 f6 c-muted-1 pointer hover-bg-muted-4 flex items-center justify-between"
+            onClick={() => handleHeaderClick("emailconsumer")}
+            title="Clique para ordenar por email"
+          >
+            <span>E-mail</span>
+            <span className="ml2">{getSortIcon("emailconsumer")}</span>
+          </div>
           <div
             className="pa3 fw6 f6 c-muted-1 pointer hover-bg-muted-4 flex items-center justify-between"
             onClick={() => handleHeaderClick("dateTimeDoc")}

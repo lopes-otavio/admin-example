@@ -8,7 +8,7 @@ import { useFilteredPagination } from "./hooks/useFilteredPagination"
 
 type Props = {}
 
-type SortOption = "dateTimeDoc" | "nameconsumer"
+type SortOption = "dateTimeDoc" | "nameconsumer" | "emailconsumer"
 type SortOrder = "asc" | "desc"
 
 function ListTelevendas({}: Props) {
@@ -28,7 +28,12 @@ function ListTelevendas({}: Props) {
         if (sortBy === "dateTimeDoc") {
           aValue = new Date(a.dateTimeDoc)
           bValue = new Date(b.dateTimeDoc)
-
+        } else if (sortBy === "nameconsumer") {
+          aValue = a.nameconsumer.toLowerCase()
+          bValue = b.nameconsumer.toLowerCase()
+        } else if (sortBy === "emailconsumer") {
+          aValue = a.emailconsumer.toLowerCase()
+          bValue = b.emailconsumer.toLowerCase()
         } else {
           aValue = a.nameconsumer.toLowerCase()
           bValue = b.nameconsumer.toLowerCase()
@@ -43,7 +48,6 @@ function ListTelevendas({}: Props) {
         return 0
       })
     }
-
     return sortData(budgets, sortBy, sortOrder)
   }, [budgets, sortBy, sortOrder])
 

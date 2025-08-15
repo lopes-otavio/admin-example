@@ -1,7 +1,7 @@
 import React from "react"
 import { Input, Dropdown } from "vtex.styleguide"
 
-type SortOption = "dateTimeDoc" | "nameconsumer"
+type SortOption = "dateTimeDoc" | "nameconsumer" | "emailconsumer"
 type SortOrder = "asc" | "desc"
 
 type SearchFilterProps = {
@@ -38,12 +38,15 @@ export default function SearchFilter({
       value: "nameconsumer",
       label: "Nome do Cliente",
     },
+    {
+      value: "emailconsumer",
+      label: "Email do Cliente",
+    },
   ]
 
   const getSortLabel = () => {
     const option = sortOptions.find((opt) => opt.value === sortBy)
     const orderLabel = sortOrder === "asc" ? "↑" : "↓"
-
     return `${option?.label} ${orderLabel}`
   }
 
