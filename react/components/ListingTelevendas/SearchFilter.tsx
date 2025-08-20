@@ -1,7 +1,7 @@
 import React from "react"
 import { Input, Dropdown } from "vtex.styleguide"
 
-type SortOption = "dateTimeDoc" | "nameconsumer" | "emailconsumer"
+type SortOption = "dateTimeDoc" | "nameconsumer" | "emailconsumer" | "dateDoc"
 type SortOrder = "asc" | "desc"
 
 type SearchFilterProps = {

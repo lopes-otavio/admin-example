@@ -23,6 +23,7 @@ export default function ListItem({ item, isLast = false }: Props) {
     navigator.clipboard.writeText(item.id)
   }
 
+  const finalizado = item?.status === 'finalizado' || item.approved
   const expired = item?.datedoc ? isExpired(item.datedoc) : false
   const isActive = item?.status === "novo" && !expired
 
@@ -51,11 +52,17 @@ export default function ListItem({ item, isLast = false }: Props) {
 
       {/* Status */}
       <div className="pa3 flex items-center">
-        {isActive ? (
-          <Tag type="success">Ativo</Tag>
-        ) : (
-          <Tag type="warning">Vencido</Tag>
+        { finalizado && (
+           <Tag type="success">Finalizado</Tag>
         )}
+        {isActive && (
+          <Tag bgColor="#134CD8" color="#ffffff">Ativo</Tag>
+        )}
+        { expired &&
+          (
+            <Tag type="error">Vencido</Tag>
+          )
+        }
       </div>
 
       {/* Ação */}

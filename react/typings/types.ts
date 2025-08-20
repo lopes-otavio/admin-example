@@ -90,8 +90,10 @@ export interface TelevendaItem {
   notedoc: string
   orderid: string
   products: string
-  status: string
+  status: 'novo'| 'finalizado' | ''
   titledoc: string
+  approved: boolean
+  files: File[]
 }
 
 export interface ShareOptions {

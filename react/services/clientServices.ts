@@ -123,7 +123,14 @@ export async function getAllTelevendasBySeller(email: string, emailconsumer?: st
   }
 }
 
+export async function searchFilesTelevenda(orderFormId: string ) {
+  const {data, status} = await axios.post(`/_v/search-files`, orderFormId)
 
+  return {
+    data,
+    status
+  }
+}
 
 export async function createTelevenda(televenda: Televenda ) {
   const {data, status} = await axios.post(`/_v/televenda`, televenda)

@@ -3,7 +3,7 @@ import type { TelevendaItem } from "../../typings/types"
 import ListItem from "./ListItem"
 import Pagination from "./Pagination"
 
-type SortOption = "dateTimeDoc" | "nameconsumer" | "emailconsumer"
+type SortOption = "dateTimeDoc" | "nameconsumer" | "emailconsumer" | "dateDoc"
 type SortOrder = "asc" | "desc"
 
 type Props = {

@@ -1,14 +1,15 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { Layout, PageHeader, Spinner } from "vtex.styleguide"
 import { getCurrentSeller, getAllTelevendasBySeller } from "./services/clientServices"
 import type { TelevendaItem } from "./typings/types"
 import ListTable from "./components/ListingTelevendas/ListTable"
 import SearchFilter from "./components/ListingTelevendas/SearchFilter"
 import { useFilteredPagination } from "./hooks/useFilteredPagination"
+import ConvertionCounter from "./components/ListingTelevendas/ConvertionCounter/ConvertionCounter"
 
 type Props = {}
 
-type SortOption = "dateTimeDoc" | "nameconsumer" | "emailconsumer"
+type SortOption = "dateTimeDoc" | "nameconsumer" | "emailconsumer" | "dateDoc"
 type SortOrder = "asc" | "desc"
 
 function ListTelevendas({}: Props) {
@@ -18,54 +19,40 @@ function ListTelevendas({}: Props) {
   const [sortBy, setSortBy] = useState<SortOption>("dateTimeDoc")
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc")
 
-  // Dados ordenados usando useMemo para evitar recálculos desnecessários
-  const sortedBudgets = useMemo(() => {
-    const sortData = (data: TelevendaItem[], sortBy: SortOption, sortOrder: SortOrder): TelevendaItem[] => {
-      return [...data].sort((a, b) => {
-        let aValue: string | Date
-        let bValue: string | Date
+  const sortFn = useCallback((a: TelevendaItem, b: TelevendaItem) => {
+    if (sortBy === "dateTimeDoc" || sortBy === "dateDoc") {
+      const aTime = new Date(a.dateTimeDoc).getTime()
+      const bTime = new Date(b.dateTimeDoc).getTime()
 
-        if (sortBy === "dateTimeDoc") {
-          aValue = new Date(a.dateTimeDoc)
-          bValue = new Date(b.dateTimeDoc)
-        } else if (sortBy === "nameconsumer") {
-          aValue = a.nameconsumer.toLowerCase()
-          bValue = b.nameconsumer.toLowerCase()
-        } else if (sortBy === "emailconsumer") {
-          aValue = a.emailconsumer.toLowerCase()
-          bValue = b.emailconsumer.toLowerCase()
-        } else {
-          aValue = a.nameconsumer.toLowerCase()
-          bValue = b.nameconsumer.toLowerCase()
-        }
-
-        if (aValue < bValue) {
-          return sortOrder === "asc" ? -1 : 1
-        }
-        if (aValue > bValue) {
-          return sortOrder === "asc" ? 1 : -1
-        }
-        return 0
-      })
+      if (isNaN(aTime) || isNaN(bTime)) return 0
+      return sortOrder === "asc" ? aTime - bTime : bTime - aTime
     }
-    return sortData(budgets, sortBy, sortOrder)
-  }, [budgets, sortBy, sortOrder])
 
-  const handleSortChange = useCallback(
-    (newSortBy: SortOption) => {
-      if (newSortBy === sortBy) {
-        // Se é a mesma coluna, inverte a ordem
-        setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
-      } else {
-        // Se é uma coluna diferente, define a ordenação padrão
-        setSortBy(newSortBy)
-        setSortOrder(newSortBy === "dateTimeDoc" ? "desc" : "asc")
-      }
-    },
-    [sortBy],
-  )
+    if (sortBy === "nameconsumer") {
+      return sortOrder === "asc"
+        ? a.nameconsumer.localeCompare(b.nameconsumer)
+        : b.nameconsumer.localeCompare(a.nameconsumer)
+    }
 
-  // Hook de paginação com filtro
+    if (sortBy === "emailconsumer") {
+      return sortOrder === "asc"
+        ? a.emailconsumer.localeCompare(b.emailconsumer)
+        : b.emailconsumer.localeCompare(a.emailconsumer)
+    }
+
+    return 0
+  }, [sortBy, sortOrder])
+
+
+  const handleSortChange = useCallback((newSortBy: SortOption) => {
+    if (newSortBy === sortBy) {
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
+    } else {
+      setSortBy(newSortBy)
+      setSortOrder(newSortBy === "dateTimeDoc" ? "desc" : "asc")
+    }
+  }, [sortBy])
+
   const {
     currentPage,
     totalPages,
@@ -79,9 +66,11 @@ function ListTelevendas({}: Props) {
     itemsPerPage,
     isSearching,
   } = useFilteredPagination({
-    data: sortedBudgets,
+    data: budgets,
     itemsPerPage: 10,
     searchFields: ["nameconsumer", "emailconsumer"],
+    resetTriggers: [sortBy, sortOrder],
+    sortFn
   })
 
   useEffect(() => {
@@ -100,26 +89,22 @@ function ListTelevendas({}: Props) {
     fetchData()
   }, [])
 
-  const SubTitle = () => {
-    return (
-      <>
-        <b>Vendedor:</b> {sellerEmail}
-        {totalUnfilteredItems > 0 && (
-          <span className="ml3 c-muted-2">
-            {isSearching ? (
-              <>
-                ({totalItems} de {totalUnfilteredItems} {totalUnfilteredItems === 1 ? "atendimento" : "atendimentos"})
-              </>
-            ) : (
-              <>
-                ({totalUnfilteredItems} {totalUnfilteredItems === 1 ? "atendimento" : "atendimentos"})
-              </>
-            )}
-          </span>
-        )}
-      </>
-    )
-  }
+  console.log('televendas', budgets)
+
+  const SubTitle = () => (
+    <>
+      <b>Vendedor:</b> {sellerEmail}
+      {totalUnfilteredItems > 0 && (
+        <span className="ml3 c-muted-2">
+          {isSearching ? (
+            <>({totalItems} de {totalUnfilteredItems} {totalUnfilteredItems === 1 ? "atendimento" : "atendimentos"})</>
+          ) : (
+            <>({totalUnfilteredItems} {totalUnfilteredItems === 1 ? "atendimento" : "atendimentos"})</>
+          )}
+        </span>
+      )}
+    </>
+  )
 
   if (isLoading) {
     return (
@@ -132,6 +117,7 @@ function ListTelevendas({}: Props) {
   return (
     <Layout pageHeader={<PageHeader title="Atendimentos" subtitle={<SubTitle />} />} fullWidth>
       <div className="pa4">
+        <ConvertionCounter televendas={budgets} />
         <SearchFilter
           searchTerm={searchTerm}
           onSearchChange={updateSearchTerm}
